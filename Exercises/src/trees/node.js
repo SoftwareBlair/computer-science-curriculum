@@ -13,7 +13,7 @@
 
 */
 
-var Node = function(name) {
+const Node = function(name) {
   this.name = name;
   this.children = [];
   this.parent = null;

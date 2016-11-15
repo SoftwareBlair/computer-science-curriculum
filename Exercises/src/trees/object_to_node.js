@@ -41,14 +41,17 @@
 
 */
 
-var Node = require('./node');
+const Node = require('./node');
 //Start on the above file- you'll want to use the class from that file!
 //It has properties already set up for you, such as 'name' and 'children'.
 //It also has a method, addChild(), which is essential.
 
 
 //Make sure that this function calls new Node()
-var objectToNode = function(object) {
+const objectToNode = function(object) {
+  let newNode = new Node(object.name);
+  object.children.forEach(data => newNode.addChild(objectToNode(data)))
+  return newNode;
 };
 
 module.exports = objectToNode;

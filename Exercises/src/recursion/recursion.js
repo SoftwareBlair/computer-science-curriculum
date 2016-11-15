@@ -33,5 +33,11 @@ module.exports = {
   */
 
   factorial: function(n) {
+    if (n - 1 > 0) {
+      return n * this.factorial(n - 1)
+    }
+    else {
+      return n || 1
+    }
   }
 }

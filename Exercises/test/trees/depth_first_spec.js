@@ -1,29 +1,35 @@
-const expect = require('chai').expect
-var depthFirst = require('../../src/trees/depth_first');
-var Node = require('../../src/trees/node');
+'use strict';
 
-describe('depthFirst', function() {
+const { expect } = require('chai');
+const depthFirst = require('../../src/trees/depth_first');
+const Node = require('../../src/trees/helper_files/node');
 
-  it("calls the given function for each node in the tree", function () {
-    var root = new Node('root');
-    var child1 = new Node('child1');
-    var child2 = new Node('child2');
-    var grandchild = new Node('grandchild');
-    child1.addChild(grandchild);
-    root.addChild(child1);
-    root.addChild(child2);
+describe('depth first search', function() {
+  describe('given a tree', function() {
+    before(function() {
+      const d = new Node('D');
+      const e = new Node('E');
+      const b = new Node('B', d, e);
+      const c = new Node('C');
+      this.a = new Node('A', b, c);
+    })
 
-    var result = [];
-    depthFirst(root, function (node, level) {
-      result.push([node.name, level]);
+    it('returns values ordered by depth first search, pre-order', function() {
+      expect(depthFirst.preOrder(this.a)).to.deep.equal(
+        ['A', 'B', 'D', 'E', 'C']
+      );
     });
 
-    expect(result).to.deep.equal([
-      ['root', 0],
-      ['child1', 1],
-      ['grandchild', 2],
-      ['child2', 1]
-    ]);
-  });
+    it('returns values ordered by depth first search, in-order', function() {
+      expect(depthFirst.inOrder(this.a)).to.deep.equal(
+        ['D', 'B', 'E', 'A', 'C']
+      );
+    });
 
+    it('returns values ordered by depth first search, post-order', function() {
+      expect(depthFirst.postOrder(this.a)).to.deep.equal(
+        ['D', 'E', 'B', 'C', 'A']
+      );
+    });
+  });
 });

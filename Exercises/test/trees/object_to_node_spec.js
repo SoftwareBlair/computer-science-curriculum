@@ -34,6 +34,7 @@ describe('objectToNode', function() {
         }
       ]
     };
+
     var rootNode = objectToNode(input);
     expect(rootNode.name).to.deep.equal('a');
     expect(rootNode).to.be.an.instanceof(Node);
