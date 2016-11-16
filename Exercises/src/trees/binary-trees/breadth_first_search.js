@@ -22,7 +22,21 @@
   Your bfs function should return the node if found, or false if not.
 */
 function bfs (root, isMatch) {
-  
+  let data = [];
+
+  data.push(root);
+
+  while (data.length > 0) {
+    let current = data.shift();
+
+    if (isMatch(current.data)) return current;
+
+    if (current.left) data.push(current.left);
+
+    if (current.right) data.push(current.right);
+
+  }
+  return false;
 }
 
 module.exports = bfs;
